@@ -40,7 +40,9 @@ jobs:
       run: echo "::set-env name=BETA::true"
 
     - name: Use scripts and templates from master branch
-      run: git checkout master -- .github/deploy.sh util/gh-pages/ util/*.py
+      run: |
+        git fetch --no-tags --prune --depth=1 origin master
+        git checkout master -- .github/deploy.sh util/gh-pages/ util/*.py
 
     - name: Deploy
       run: |
